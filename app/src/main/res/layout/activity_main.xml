@@ -1,14 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/user"
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:layout_height="120dp"
+        android:background="@color/blue">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
 
     <Button
         android:id="@+id/button"
         android:text="登录"
+        android:layout_below="@id/user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="buttonLogin"/>
 
-</LinearLayout>
+    <Button
+        android:id="@+id/button2"
+        android:text="获取用户信息"
+        android:layout_below="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="buttonGet"/>
+
+    <Button
+        android:id="@+id/button3"
+        android:text="分享测试"
+        android:layout_below="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="buttonShare"/>
+
+    <TextView
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button3"/>
+
+    <View
+        android:layout_below="@id/login"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#000000"/>
+
+    <TextView
+        android:id="@+id/userInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login"/>
+</RelativeLayout>

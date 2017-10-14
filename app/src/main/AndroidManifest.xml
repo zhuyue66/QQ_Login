@@ -5,6 +5,7 @@
     <!--QQ登录需要的权限-->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -28,7 +29,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="tencent1106396575" /> <!-- 开放平台获取的APPID -->
+                <data android:scheme="tencent1106396575" /> <!-- 开放平台获取的APPID  1106396575 -->
             </intent-filter>
         </activity>
         <activity android:name="com.tencent.connect.common.AssistActivity"
