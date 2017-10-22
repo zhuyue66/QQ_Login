@@ -1,7 +1,6 @@
 package com.example.qq_login.Share;
 
 import com.example.qq_login.SecondActivity;
-
 import java.util.ArrayList;
 
 /**

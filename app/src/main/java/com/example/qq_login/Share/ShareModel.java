@@ -1,5 +1,7 @@
 package com.example.qq_login.Share;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 import com.example.qq_login.Listener.BaseListener;
@@ -75,6 +77,8 @@ public class ShareModel implements ShareContract.QQ_Share {
     public void logout() {
         Toast.makeText(MyApplication.getContext(),"注销成功",Toast.LENGTH_SHORT).show();
         MainActivity.getTencent().logout(MyApplication.getContext());
+        SharedPreferences.Editor set_userInfo = MyApplication.getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE).edit();
+        set_userInfo.putBoolean("is_first",true);
+        set_userInfo.apply();
     }
-
 }

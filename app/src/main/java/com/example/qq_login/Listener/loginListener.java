@@ -1,13 +1,15 @@
 package com.example.qq_login.Listener;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.example.qq_login.MainActivity;
 import com.example.qq_login.util.MyApplication;
 import com.tencent.tauth.UiError;
 import org.json.JSONException;
 import org.json.JSONObject;
+import static android.content.Context.MODE_PRIVATE;
 
 
 /**
@@ -27,13 +29,23 @@ public class loginListener extends BaseListener {
             String openID = jsonObject.getString("openid");
             String accessToken = jsonObject.getString("access_token");
             String expires = jsonObject.getString("expires_in");
+            Log.e(TAG, "***********************" + openID + accessToken + expires);
             //数据存储SharedPreferences
-            SharedPreferences.Editor set_userInfo = MyApplication.getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE).edit();
+            SharedPreferences.Editor set_userInfo = MyApplication.getContext().getSharedPreferences("userInfo",MODE_PRIVATE).edit();
             set_userInfo.putString("openID",openID);
             set_userInfo.putString("expires",expires);
             set_userInfo.putString("accessToken",accessToken);
             set_userInfo.putBoolean("is_first",false);
             set_userInfo.apply();
+
+            /*SharedPreferences get_userInfo = MyApplication.getContext().getSharedPreferences("userInfo",MODE_PRIVATE);
+            MainActivity.getTencent().setOpenId(get_userInfo.getString("openID",null));
+            MainActivity.getTencent().setAccessToken(get_userInfo.getString("accessToken",null), get_userInfo.getString("expires",null));*/
+
+            /*MainActivity.getTencent().setOpenId(openID);
+            Log.e(TAG, "----------in set-------------------");
+            MainActivity.getTencent().setAccessToken(accessToken,expires);*/
+
         }catch (JSONException e){
             e.printStackTrace();
         }
