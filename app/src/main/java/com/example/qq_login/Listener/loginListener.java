@@ -37,15 +37,10 @@ public class loginListener extends BaseListener {
             set_userInfo.putString("accessToken",accessToken);
             set_userInfo.putBoolean("is_first",false);
             set_userInfo.apply();
-
-            /*SharedPreferences get_userInfo = MyApplication.getContext().getSharedPreferences("userInfo",MODE_PRIVATE);
+            //设置mTencent授权
+            SharedPreferences get_userInfo = MyApplication.getContext().getSharedPreferences("userInfo",MODE_PRIVATE);
             MainActivity.getTencent().setOpenId(get_userInfo.getString("openID",null));
-            MainActivity.getTencent().setAccessToken(get_userInfo.getString("accessToken",null), get_userInfo.getString("expires",null));*/
-
-            /*MainActivity.getTencent().setOpenId(openID);
-            Log.e(TAG, "----------in set-------------------");
-            MainActivity.getTencent().setAccessToken(accessToken,expires);*/
-
+            MainActivity.getTencent().setAccessToken(get_userInfo.getString("accessToken",null), get_userInfo.getString("expires",null));
         }catch (JSONException e){
             e.printStackTrace();
         }

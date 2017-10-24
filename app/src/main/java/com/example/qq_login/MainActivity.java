@@ -1,8 +1,11 @@
 package com.example.qq_login;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -43,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         mTencent = Tencent.createInstance(APP_ID, MainActivity.this.getApplicationContext());
         set_userInfo = MyApplication.getContext().getSharedPreferences("userInfo",MODE_PRIVATE).edit();
-        //SharedPreferences第一次登录"is_first"值为true
         set_userInfo.apply();
         get_userInfo = getSharedPreferences("userInfo",MODE_PRIVATE);
         if (get_userInfo.getBoolean("is_first",true)){
@@ -53,13 +55,35 @@ public class MainActivity extends AppCompatActivity {
         }else {
             Log.e(TAG, "++++++++++++++++in else++++++++++++++++");
         }
-        SharedPreferences get_userInfo = MyApplication.getContext().getSharedPreferences("userInfo",MODE_PRIVATE);
+        get_userInfo = MyApplication.getContext().getSharedPreferences("userInfo",MODE_PRIVATE);
         MainActivity.getTencent().setOpenId(get_userInfo.getString("openID",null));
         Log.e(TAG, "0000000000 in set 000000000");
         MainActivity.getTencent().setAccessToken(get_userInfo.getString("accessToken",null), get_userInfo.getString("expires",null));
 
-        UserInfo userInfo = new UserInfo(MainActivity.this, mTencent.getQQToken());
-        userInfo.getUserInfo(new UserInfoListener());
+        if (get_userInfo.getString("nickname",null) == null){
+            AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+            dialog.setTitle("是否绑定QQ");
+            dialog.setCancelable(false);
+            dialog.setPositiveButton("是", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Log.e(TAG, "Dialog onClick: " + get_userInfo.getString("accessToken",null));
+                    UserInfo userInfo = new UserInfo(MainActivity.this, mTencent.getQQToken());
+                    userInfo.getUserInfo(new UserInfoListener());
+                }
+            });
+            dialog.setNegativeButton("否", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    UserInfo userInfo = new UserInfo(MainActivity.this, mTencent.getQQToken());
+                    userInfo.getUserInfo(new UserInfoListener());
+                }
+            });
+            dialog.show();
+        }else {
+            Log.e(TAG, "第二次登录AlerDialog不显示");
+        }
+        Log.e(TAG, "onCreate: " + get_userInfo.getString("nickname","朱达"));
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

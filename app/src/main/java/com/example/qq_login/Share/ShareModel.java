@@ -79,6 +79,11 @@ public class ShareModel implements ShareContract.QQ_Share {
         MainActivity.getTencent().logout(MyApplication.getContext());
         SharedPreferences.Editor set_userInfo = MyApplication.getContext().getSharedPreferences("userInfo", Context.MODE_PRIVATE).edit();
         set_userInfo.putBoolean("is_first",true);
+        set_userInfo.putString("icon",null);
+        set_userInfo.putString("nickname",null);
+        set_userInfo.putString("accessToken",null);
+        set_userInfo.putString("expires",null);
+        set_userInfo.putString("openID",null);
         set_userInfo.apply();
     }
 }
