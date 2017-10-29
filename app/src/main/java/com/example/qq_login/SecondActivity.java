@@ -1,5 +1,7 @@
 package com.example.qq_login;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -7,6 +9,8 @@ import android.widget.Button;
 
 import com.example.qq_login.Share.ShareContract;
 import com.example.qq_login.Share.ShareModel;
+import com.tencent.tauth.Tencent;
+
 import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,7 +52,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.logout:
                 shareModel.logout();
-            default:
+            default :
                 break;
         }
     }
@@ -56,6 +60,10 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public SecondActivity get() {
         return this;
+    }
+
+    public void abc(View v){
+
     }
 
 }

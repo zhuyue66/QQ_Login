@@ -23,6 +23,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <Button
+        android:id="@+id/talk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logout"
+        android:text="临时会话"
+        android:onClick="abc"/>
+
 </RelativeLayout>
 
 
